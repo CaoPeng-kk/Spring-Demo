@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       default-autowire="byName"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+        
+        <bean id="customerService" class="nov.service.impl.CustomerServiceImpl"></bean>
+  		<!--基于xml的Spring AOP 的配置  -->      
+        <bean id="logger" class="nov.utils.Logger"> </bean>
+        <!--导入名称空间  -->
+		<aop:config>
+			<aop:aspect id="logAdvice" ref="logger">
+				<aop:before method="printLogger" pointcut="execution(public void nov.service.impl.CustomerServiceImpl.saveCustomer())"/>
+			</aop:aspect>
+		</aop:config>
+		
+		
+        
+</beans>
